@@ -1,0 +1,10 @@
+# Copy this file to .env and fill it in. Never commit .env.
+# Neon connection string (Neon console > your project > Connect).
+DATABASE_URL=postgresql://USER:PASSWORD@ep-example-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+# Signs session cookies. At least 32 random characters. Generate one with:
+#   node -p "require('crypto').randomBytes(32).toString('base64')"
+BETTER_AUTH_SECRET=
+# Public address of the app, no trailing slash. Optional locally (defaults to http://localhost:PORT)
+# and on Render (RENDER_EXTERNAL_URL is used); required on other hosts, e.g. https://my-app.example.com
+# BETTER_AUTH_URL=
+PORT=3000

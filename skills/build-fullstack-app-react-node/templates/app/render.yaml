@@ -1,0 +1,20 @@
+# Render Blueprint: one web service runs the API and the built React app.
+# DATABASE_URL is the Neon connection string; set it in the Render dashboard (it is never stored in git).
+services:
+  - type: web
+    name: __APP_SLUG__
+    runtime: node
+    plan: free
+    # devDependencies (Vite) are needed to build, so install them even though NODE_ENV=production.
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: DATABASE_URL
+        sync: false
+      # Signs session cookies; Render generates a random value once. Auth's public URL
+      # comes from RENDER_EXTERNAL_URL, which Render sets itself.
+      - key: BETTER_AUTH_SECRET
+        generateValue: true
